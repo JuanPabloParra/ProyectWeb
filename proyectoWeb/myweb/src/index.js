@@ -12,7 +12,7 @@ ReactDOM.render(
       <Flex direction="column" align="center" maxW="600px" mx="auto" p="4">
         <Menu />
         <Box mt="4">
-          <Text fontSize="2xl" fontWeight="bold">Tweets</Text>
+          <Text fontSize="2xl" fontWeight="bold"></Text>
           <HomePage />
           <App />
         </Box>
