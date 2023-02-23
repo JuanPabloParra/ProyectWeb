@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ChakraProvider, Box, Flex, Text, Stack } from '@chakra-ui/react';
+import Menu from './shared/Menu';
+import PublicarTweet from './components/PublicarTweet';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Flex direction="column" align="center" maxW="600px" mx="auto" p="4">
+        <Menu />
+        <Box mt="4">
+          <Text fontSize="2xl" fontWeight="bold">Comparte tu noticia del día.</Text>
+          <Stack spacing="4" mt="4" w="100%">
+            <PublicarTweet />
+            <HomePage />
+          </Stack>
+        </Box>
+      </Flex>
+    </ChakraProvider>
   );
 }
 
 export default App;
+
