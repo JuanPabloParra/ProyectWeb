@@ -5,6 +5,8 @@ function Login() {
   return (
     <form>
       <FormControl>
+        
+        <h1> INICIAR SESIÓN:</h1>
         <FormLabel>Usuario</FormLabel>
         <Input type="text" borderRadius="md" borderTopRightRadius={0} borderTopLeftRadius={0} />
       </FormControl>
