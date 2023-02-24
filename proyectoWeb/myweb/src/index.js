@@ -5,7 +5,7 @@ import { ChakraProvider, Box, Flex, Text } from '@chakra-ui/react';
 import Menu from './shared/Menu';
 import HomePage from './pages/HomePage';
 import App from './App';
- 
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
@@ -23,8 +23,6 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-
-
 
 
 

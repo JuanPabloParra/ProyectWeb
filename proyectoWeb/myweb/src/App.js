@@ -1,31 +1,43 @@
-import React from 'react';
-import { ChakraProvider, Box, Flex, Text, Stack } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Flex, Text, Link } from '@chakra-ui/react';
 import Menu from './shared/Menu';
+import Login from './components/Login';
 import PublicarTweet from './components/PublicarTweet';
-import HomePage from './pages/HomePage';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showCompartir, setShowCompartir] = useState(true);
+
+  const handleLoginClick = (event) => {
+    event.preventDefault();
+    setShowLogin(true);
+  };
+
   return (
-    // ChakraProvider es un componente de la biblioteca de interfaz de usuario de Chakra que proporciona estilo
-    // y contexto temático a sus hijos
-    // El menú es un componente personalizado que probablemente contiene enlaces u opciones de navegación
     <ChakraProvider>
-      <Flex direction="column" align="center" maxW="800px" mx="auto" p="4" margin="auto">
-        
-        <Menu /> 
-        
-        <Box mt="4">
-          <Text fontSize="2xl" fontWeight="bold">Comparte tu noticia del día.</Text>
-          <Stack spacing="4" mt="4" maxW="100%" px="1">
-            <PublicarTweet />
-            <HomePage />
-          </Stack>
+      {!showLogin ? (
+        <Flex direction="column" align="center" maxW="800px" mx="auto" p="4" margin="auto">
+          <Menu />
+          <Box mt="4">
+            <Text fontSize="2xl" fontWeight="bold">Comparte tu noticia del día.</Text>
+          </Box>
+          {showCompartir && (
+            <Box mt="4">
+              <PublicarTweet />
+            </Box>
+          )}
+          <Box mt="4">
+            <Link href="#" onClick={handleLoginClick}>Dale click aquí para iniciar sesión</Link>
+          </Box>
+        </Flex>
+      ) : (
+        <Box bg="white" w="100%" h="100%">
+          <Login />
         </Box>
-      </Flex>
+      )}
     </ChakraProvider>
   );
 }
 
 export default App;
-
-
