@@ -1,4 +1,4 @@
-// Función para obtener la fecha actual en formato yyyy-mm-dd
+// Función para obtener la fecha actual en formato yyyy-mm-dd (Sigue en pruebas de funcionamiento)
 function getTodayDate() {
     const today = new Date();
     const year = today.getFullYear();
