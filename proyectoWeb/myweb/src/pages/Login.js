@@ -8,6 +8,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+// muestra un formulario para iniciar sesión en una aplicación. (Este está en fase de pruebas aun no es algo funcional)-
+//Cuando el usuario envía el formulario, se verifica si el correo electrónico y la contraseña son válidos. (Fase en prueba)
+
+
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
