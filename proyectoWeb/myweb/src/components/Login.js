@@ -16,7 +16,7 @@ function Login() {
         <FormLabel>Contraseña</FormLabel>
         <Input type="password" borderRadius="md" borderBottomRightRadius={0} borderBottomLeftRadius={0} />
       </FormControl>
-      <Button colorScheme="orange" borderRadius="md" mt={4}>Iniciar sesión</Button> 
+      <Button bg="#FF4500" borderRadius="md" mt={4} color="#DDD8D8">Iniciar sesión</Button> 
     </form>
   );
 }
