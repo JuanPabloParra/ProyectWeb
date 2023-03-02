@@ -9,9 +9,8 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <Flex direction="column" align="center" maxW="600px" mx="auto" p="4">
-        <Menu />
-        <Box mt="4">
+    <Flex direction="column" align="center" maxW="1200px" mx="auto" p="4">
+         <Box mt="4">
           <Text fontSize="2xl" fontWeight="bold"></Text>
           <HomePage />
           <App />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+ 
 //Agrupación de etiquetas con FormControl
 //En el texto de entrada para usuario junto con su curvatura de los bordes, se usa input type, bordeRadius, borderBottomRightRadius y borderBottomLeftRadius.
 //En el texto de entrada para contraseña junto con su curvatura de los bordes, se usa input type, bordeRadius, borderBottomRightRadius y borderBottomLeftRadius.
