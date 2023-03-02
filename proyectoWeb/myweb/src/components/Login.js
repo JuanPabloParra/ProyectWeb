@@ -8,7 +8,6 @@ function Login() {
   return (
     <form> 
       <FormControl>  
-        
         <h1> INICIAR SESIÓN:</h1>
         <FormLabel>Usuario</FormLabel>
         <Input type="text" borderRadius="md" borderTopRightRadius={0} borderTopLeftRadius={0} /> 
@@ -18,6 +17,7 @@ function Login() {
         <Input type="password" borderRadius="md" borderBottomRightRadius={0} borderBottomLeftRadius={0} />
       </FormControl>
       <Button bg="#FF4500" borderRadius="md" mt={4} color="#DDD8D8">Iniciar sesión</Button> 
+      
     </form>
   );
 }
