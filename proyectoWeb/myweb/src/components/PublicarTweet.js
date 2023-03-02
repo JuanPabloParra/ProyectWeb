@@ -39,7 +39,7 @@ function PublicarTweet({ onMensajeEnviado }) {
       />
       <Stack direction="row" justify="space-between" mt="3">
         <Box />
-        <Button colorScheme="orange" size="md" onClick={enviarTweet} opacity={textoVacio ? 0.5 : 1}>
+        <Button bg="#FF4500" color="white" size="md" onClick={enviarTweet} opacity={textoVacio ? 0.5 : 1}>
           Publicar
         </Button>
       </Stack>
