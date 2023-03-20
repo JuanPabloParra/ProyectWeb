@@ -4,7 +4,7 @@ import Menu from './shared/Menu';
 import Login from './components/Login';
 import PublicarTweet from './components/PublicarTweet';
 import { ChakraProvider } from '@chakra-ui/react';
-
+import RedditCards from './components/RedditCards';
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showCompartir, setShowCompartir] = useState(true);
@@ -30,6 +30,10 @@ function App() {
           <Box mt="4">
             <Link href="#" onClick={handleLoginClick}>Dale click aquí para iniciar sesión</Link>
           </Box>
+          <Box mt="4">
+  <RedditCards />
+</Box>
+
         </Flex>
       ) : (
         <Box bg="white" w="100%" h="100%">
