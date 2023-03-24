@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
-
 function RedditCards() {
   const [likes, setLikes] = useState([0, 0, 0]);
   const [dislikes, setDislikes] = useState([0, 0, 0]);
+  const [userVotes, setUserVotes] = useState([0, 0, 0]);
 
   const handleLikeClick = (index) => {
-    const newLikes = [...likes];
-    newLikes[index]++;
-    setLikes(newLikes);
+    if (userVotes[index] !== 1) {
+      const newLikes = [...likes];
+      newLikes[index]++;
+      setLikes(newLikes);
+      setUserVotes((prevUserVotes) =>
+        prevUserVotes.map((vote, i) => (i === index ? 1 : vote))
+      );
+    }
   };
 
   const handleDislikeClick = (index) => {
-    const newDislikes = [...dislikes];
-    newDislikes[index]++;
-    setDislikes(newDislikes);
+    if (userVotes[index] !== -1) {
+      const newDislikes = [...dislikes];
+      newDislikes[index]++;
+      setDislikes(newDislikes);
+      setUserVotes((prevUserVotes) =>
+        prevUserVotes.map((vote, i) => (i === index ? -1 : vote))
+      );
+    }
   };
 
+  const [selectedUpVote, setSelectedUpVote] = useState(-1);
+  const [selectedDownVote, setSelectedDownVote] = useState(-1);
   return (
     <Flex direction="row" align="center" justify="center">
       <Box w="30%" borderWidth="1px" borderRadius="lg" overflow="hidden" mr="2">
