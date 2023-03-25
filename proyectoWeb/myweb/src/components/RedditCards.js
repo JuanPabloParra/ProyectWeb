@@ -4,17 +4,47 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 function RedditCards() {
   const [likes, setLikes] = useState([0, 0, 0]);
   const [dislikes, setDislikes] = useState([0, 0, 0]);
+  const [userVotes, setUserVotes] = useState([0, 0, 0]);
+  const [highlightedLike, setHighlightedLike] = useState(-1);
+  const [highlightedDislike, setHighlightedDislike] = useState(-1);
+  const [lastVote, setLastVote] = useState(null);
 
   const handleLikeClick = (index) => {
-    const newLikes = [...likes];
-    newLikes[index]++;
-    setLikes(newLikes);
+    if (lastVote === "v") {
+      const newDislikes = [...dislikes];
+      newDislikes[index] = Math.max(newDislikes[index] - 1, 0);
+      setDislikes(newDislikes);
+    }
+
+    if (userVotes[index] !== 1 || lastVote !== "^") {
+      const newLikes = [...likes];
+      newLikes[index]++;
+      setLikes(newLikes);
+      setUserVotes((prevUserVotes) =>
+        prevUserVotes.map((vote, i) => (i === index ? 1 : vote))
+      );
+      setLastVote("^");
+    }
+    setHighlightedLike(index);
   };
 
   const handleDislikeClick = (index) => {
-    const newDislikes = [...dislikes];
-    newDislikes[index]++;
-    setDislikes(newDislikes);
+    if (lastVote === "^") {
+      const newLikes = [...likes];
+      newLikes[index] = Math.max(newLikes[index] - 1, 0);
+      setLikes(newLikes);
+    }
+
+    if (userVotes[index] !== -1 || lastVote !== "v") {
+      const newDislikes = [...dislikes];
+      newDislikes[index]++;
+      setDislikes(newDislikes);
+      setUserVotes((prevUserVotes) =>
+        prevUserVotes.map((vote, i) => (i === index ? -1 : vote))
+      );
+      setLastVote("v");
+    }
+    setHighlightedDislike(index);
   };
 
   return (
@@ -26,9 +56,9 @@ function RedditCards() {
         <Box p="4">
           <Flex align="center" justify="space-between">
             <Flex direction="column" align="center">
-              <span onClick={() => handleLikeClick(0)}>^</span>
+              <span onClick={() => handleLikeClick(0)} style={{ cursor: "pointer", color: userVotes[0] === 1 ? "orange" : "black" }}>^</span>
               <span>{likes[0]}</span>
-              <span onClick={() => handleDislikeClick(0)}>v</span>
+              <span onClick={() => handleDislikeClick(0)} style={{ cursor: "pointer", color: userVotes[0] === -1 ? "orange" : "black" }}>v</span>
             </Flex>
           </Flex>
         </Box>
@@ -40,9 +70,9 @@ function RedditCards() {
         <Box p="4">
           <Flex align="center" justify="space-between">
             <Flex direction="column" align="center">
-              <span onClick={() => handleLikeClick(1)}>^</span>
+              <span onClick={() => handleLikeClick(1)} style={{ cursor: "pointer", color: userVotes[1] === 1 ? "orange" : "black" }}>^</span>
               <span>{likes[1]}</span>
-              <span onClick={() => handleDislikeClick(1)}>v</span>
+              <span onClick={() => handleDislikeClick(1)} style={{ cursor: "pointer", color: userVotes[1] === -1 ? "orange" : "black" }}>v</span>
             </Flex>
           </Flex>
         </Box>
@@ -54,16 +84,14 @@ function RedditCards() {
         <Box p="4">
           <Flex align="center" justify="space-between">
             <Flex direction="column" align="center">
-              <span onClick={() => handleLikeClick(2)}>^</span>
+              <span onClick={() => handleLikeClick(2)} style={{ cursor: "pointer", color: userVotes[2] === 1 ? "orange" : "black" }}>^</span>
               <span>{likes[2]}</span>
-              <span onClick={() => handleDislikeClick(2)}>v</span>
+              <span onClick={() => handleDislikeClick(2)} style={{ cursor: "pointer", color: userVotes[2] === -1 ? "orange" : "black" }}>v</span>
             </Flex>
           </Flex>
         </Box>
       </Box>
     </Flex>
   );
-}
-
+  }
 export default RedditCards;
-
