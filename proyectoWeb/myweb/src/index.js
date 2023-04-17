@@ -5,7 +5,7 @@ import { ChakraProvider, Box, Flex, Text } from '@chakra-ui/react';
 import Menu from './shared/Menu';
 import HomePage from './pages/HomePage';
 import App from './App';
-
+import ChatBubble from './components/ChatBubble';
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
@@ -14,6 +14,7 @@ ReactDOM.render(
           <Text fontSize="2xl" fontWeight="bold"></Text>
           <HomePage />
           <App />
+          <ChatBubble />
         </Box>
       </Flex>
     </ChakraProvider>
