@@ -2,16 +2,22 @@ import React from 'react';
 import { Avatar } from '@chakra-ui/react';
 
 function ProfileCircle(props) {
-    return (
-      <Avatar
-        size="sm"
-        name={props.userName}
-        src="https://bit.ly/dan-abramov"
-      />
-    );
-  }
-  
-  export default ProfileCircle;
+    if (props.userName) {
+        return (
+            <Avatar
+                size="sm"
+                name={props.userName}
+                src="https://bit.ly/dan-abramov"
+            />
+        );
+    } else {
+        return null;
+    }
+}
+
+export default ProfileCircle;
+
+
   /*Dentro del componente ProfileCircle, se utiliza el componente Avatar para mostrar un avatar circular. 
   La propiedad size establece el tamaño del avatar en "sm" (pequeño), 
   y la propiedad name establece el nombre que se mostrará en el avatar. También se incluye una imagen de ejemplo mediante la propiedad src.
