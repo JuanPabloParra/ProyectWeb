@@ -16,6 +16,7 @@ import { FiMessageSquare, FiX } from "react-icons/fi";
 const ChatBubble = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [message, setMessage] = useState("");
+  const [messagesList, setMessagesList] = useState([]);
   const chatBg = useColorModeValue("white", "gray.700");
   const chatBorderColor = useColorModeValue("gray.200", "gray.600");
   const chatShadow = useColorModeValue(
@@ -26,6 +27,7 @@ const ChatBubble = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Enviando mensaje:", message);
+    setMessagesList([...messagesList, message]);
     setMessage("");
   };
 
@@ -82,22 +84,57 @@ const ChatBubble = () => {
           <Text fontSize="sm" color="gray.500" mb={2}>
             Historial de mensajes
           </Text>
-          <Box borderWidth="1px" borderColor={chatBorderColor} borderRadius="lg" p={2} mb={2}>
-            <Text fontSize="sm" color="gray.500">
-              No hay mensajes.
-            </Text>
-          </Box>
+          {messagesList.length ? (
+            messagesList.map((msg, index) => (
+              <Box
+                key={index}
+                borderWidth="1px"
+                borderColor={chatBorderColor}
+                borderRadius="lg"
+                p={2}
+                mb={2}
+              >
+                <Text fontSize="sm" color="gray.500">
+                  {msg}
+                </Text>
+              </Box>
+            ))
+          ) : (
+            <Box
+              borderWidth="1px"
+              borderColor={chatBorderColor}
+              borderRadius="lg"
+              p={2}
+              mb={2}
+            >
+              <Text fontSize="sm" color="gray.500">
+                No hay mensajes
+              </Text>
+            </Box>
+          )}
+
           <form onSubmit={handleSubmit}>
             <InputGroup>
               <Input
-                placeholder="Escribe tu mensaje"
+                type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                placeholder="Escribe un mensaje..."
                 size="sm"
-                borderRadius="lg"
+                focusBorderColor="orange.500"
+                borderTopRadius="0"
               />
               <InputRightElement>
-                <Button type="submit" variant="outline" size="sm">
+                <Button
+                  type="submit"
+                  size="sm"
+                  bg="orange.500"
+                  color="white"
+                  px={4}
+                  borderTopRadius="0"
+                  _hover={{ bg: "orange.600" }}
+                  _active={{ bg: "orange.700" }}
+                >
                   Enviar
                 </Button>
               </InputRightElement>
@@ -110,3 +147,4 @@ const ChatBubble = () => {
 };
 
 export default ChatBubble;
+
