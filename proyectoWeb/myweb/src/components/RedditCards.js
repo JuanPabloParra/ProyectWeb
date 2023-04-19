@@ -50,7 +50,7 @@ function RedditCards() {
   return (
     <Flex direction="row" align="center" justify="center">
       <Box w="30%" borderWidth="1px" borderRadius="lg" overflow="hidden" mr="2">
-        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">This is the content of post 1.</Text>
+        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">Hoy han subieron el precio del almuerzo de la Univesidad!!! Estaba a a 12mil y lo han subido  a 13!!</Text>
         <Text fontSize="sm" color="gray.500" mt="2" ml="2">Hace 6 horas por the_big_mothergoose</Text>
 
         <Box p="4">
@@ -64,7 +64,7 @@ function RedditCards() {
         </Box>
       </Box>
       <Box w="30%" borderWidth="1px" borderRadius="lg" overflow="hidden" mr="2">
-        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">This is the content of post 2.</Text>
+        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">Vertedero es lo peor.</Text>
         <Text fontSize="sm" color="gray.500" mt="2" ml="2">Hace 3 horas por the_small_hummingbird</Text>
 
         <Box p="4">
@@ -78,7 +78,7 @@ function RedditCards() {
         </Box>
       </Box>
       <Box w="30%" borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">This is the content of post 3.</Text>
+        <Text fontSize="md" fontWeight="bold" mt="2" ml="2">Que hay para hacer hoy?</Text>
         <Text fontSize="sm" color="gray.500" mt="2" ml="2">Hace 1 hora por the_cool_caterpillar</Text>
 
         <Box p="4">
