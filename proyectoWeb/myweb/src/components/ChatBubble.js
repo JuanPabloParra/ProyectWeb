@@ -1,22 +1,11 @@
 import { useState } from "react";
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  Input,
-  InputGroup,
-  InputRightElement,
-  IconButton,
-  useDisclosure,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import {Box, Flex, Text, Button, Input, InputGroup, InputRightElement, IconButton, useDisclosure, useColorModeValue, } from "@chakra-ui/react";
 import { FiMessageSquare, FiX } from "react-icons/fi";
 
 const ChatBubble = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [message, setMessage] = useState("");
-  const [messagesList, setMessagesList] = useState([]);
+  const [messages, setMessages] = useState([]);
   const chatBg = useColorModeValue("white", "gray.700");
   const chatBorderColor = useColorModeValue("gray.200", "gray.600");
   const chatShadow = useColorModeValue(
@@ -26,9 +15,10 @@ const ChatBubble = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviando mensaje:", message);
-    setMessagesList([...messagesList, message]);
-    setMessage("");
+    if (message !== "") {
+      setMessages([...messages, message]);
+      setMessage("");
+    }
   };
 
   return (
@@ -84,8 +74,8 @@ const ChatBubble = () => {
           <Text fontSize="sm" color="gray.500" mb={2}>
             Historial de mensajes
           </Text>
-          {messagesList.length ? (
-            messagesList.map((msg, index) => (
+          {messages.length > 0 ? (
+            messages.map((msg, index) => (
               <Box
                 key={index}
                 borderWidth="1px"
@@ -100,29 +90,29 @@ const ChatBubble = () => {
               </Box>
             ))
           ) : (
-            <Box
-              borderWidth="1px"
-              borderColor={chatBorderColor}
-              borderRadius="lg"
-              p={2}
-              mb={2}
-            >
-              <Text fontSize="sm" color="gray.500">
-                No hay mensajes
-              </Text>
+            <Box borderWidth="1px" borderColor={chatBorderColor} borderRadius="lg" p={2} mb={2}>
+              {messages.length === 0 ? (
+                <Text fontSize="sm" color="gray.500">
+                   No hay mensajes.
+               </Text>
+              ) : (
+                messages.map((msg, i) => (
+                  <Box key={i} mb={2}>
+                    <Text fontSize="sm">{msg}</Text>
+                  </Box>
+                ))
+              )}
             </Box>
           )}
-
-          <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit}>
             <InputGroup>
               <Input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Escribe un mensaje..."
                 size="sm"
                 focusBorderColor="orange.500"
                 borderTopRadius="0"
+                value={message} // Agregar el prop `value`
+                onChange={(e) => setMessage(e.target.value)} // Agregar el prop `onChange`
               />
               <InputRightElement>
                 <Button
@@ -147,4 +137,3 @@ const ChatBubble = () => {
 };
 
 export default ChatBubble;
-
