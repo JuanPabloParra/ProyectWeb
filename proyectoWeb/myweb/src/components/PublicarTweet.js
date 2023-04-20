@@ -10,6 +10,7 @@ function PublicarTweet({ onMensajeEnviado }) {
       onMensajeEnviado({
         texto: tweet,
         fecha: new Date(),
+        likes: 0, // Agregar una nueva propiedad "likes" al mensaje
       });
       setTweet('');
       setTextoVacio(true);
@@ -52,14 +53,30 @@ function Foro() {
     setMensajes([...mensajes, mensaje]);
   };
 
+  const manejarLike = (index) => {
+    const nuevosMensajes = mensajes.map((mensaje, i) => {
+      if (i === index) {
+        return { ...mensaje, likes: mensaje.likes > 0 ? 0 : 1 };
+      } else {
+        return mensaje;
+      }
+    });
+    setMensajes(nuevosMensajes);
+  };
+  
+
   return (
     <Box>
       <PublicarTweet onMensajeEnviado={agregarMensaje} />
-      {mensajes.map((mensaje) => (
+      {mensajes.map((mensaje, index) => (
         <Box borderWidth="1px" borderRadius="md" p="3" mt="3">
           <Text>{mensaje.texto}</Text>
           <Text fontSize="sm" color="gray.500">
-            {mensaje.fecha.toLocaleString()}
+            {mensaje.fecha.toLocaleString()}{" "}
+            - Likes: {mensaje.likes}{" "}
+            <Button size="xs" onClick={() => manejarLike(index)}>
+              Me gusta
+            </Button>
           </Text>
         </Box>
       ))}
