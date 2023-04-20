@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { FormControl, FormLabel, Input, Button, Box, Flex, Text } from '@chakra-ui/react';
 import MenuButton from '../shared/MenuButton';
 import ProfileCircle from './ProfileCircle';
+import Registro from './Registro';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isRegistroOpen, setIsRegistroOpen] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -27,6 +29,10 @@ function Login() {
     }
   }
 
+  const toggleRegistro = () => {
+    setIsRegistroOpen(!isRegistroOpen);
+  };
+
   return (
     <Box as="header" borderBottomWidth="0">
       <Flex justify="space-between" align="center" maxW="1200px" mx="auto" p="">
@@ -35,6 +41,10 @@ function Login() {
         </Box>
         <Box position="absolute" left="20" top="4">
           <MenuButton />
+        </Box>
+        <Box>
+        
+          {isRegistroOpen && <Registro />}
         </Box>
       </Flex>
       <form>
@@ -66,6 +76,9 @@ function Login() {
         <Button bg="#FF4500" borderRadius="md" mt={4} color="#DDD8D8" onClick={handleLogin}>
           Iniciar sesión
         </Button>
+        <Button bg="#FF4500" borderRadius="md" mt={4} ml={2} color="#DDD8D8" onClick={toggleRegistro}>
+            Registrarse
+          </Button>
         {errorMessage && <Text mt={2} color="red.500">{errorMessage}</Text>}
       </form>
     </Box>
@@ -73,4 +86,3 @@ function Login() {
 }
 
 export default Login;
-
