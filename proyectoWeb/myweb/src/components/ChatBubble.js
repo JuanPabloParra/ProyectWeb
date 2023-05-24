@@ -22,7 +22,7 @@ const ChatBubble = () => {
   const chatBorderColor = useColorModeValue('gray.200', 'gray.600');
   const chatShadow = useColorModeValue('0 1px 2px rgba(0, 0, 0, 0.2)', 'none');
 
-  // Obtener los mensajes al cargar el componente
+  // Obtener los mensajes al cargar el componente y después de guardar un nuevo mensaje
   useEffect(() => {
     getMessages();
   }, []);
@@ -49,6 +49,9 @@ const ChatBubble = () => {
       // Actualizar la lista de mensajes
       setMessagesList([...messagesList, { content: message }]);
       setMessage('');
+
+      // Obtener los mensajes actualizados
+      getMessages();
     } catch (error) {
       console.error('Error al guardar el mensaje:', error);
     }
