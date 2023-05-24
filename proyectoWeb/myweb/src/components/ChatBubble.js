@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -10,25 +10,48 @@ import {
   IconButton,
   useDisclosure,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { FiMessageSquare, FiX } from "react-icons/fi";
+} from '@chakra-ui/react';
+import { FiMessageSquare, FiX } from 'react-icons/fi';
+import axios from 'axios';
 
 const ChatBubble = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [messagesList, setMessagesList] = useState([]);
-  const chatBg = useColorModeValue("white", "gray.700");
-  const chatBorderColor = useColorModeValue("gray.200", "gray.600");
-  const chatShadow = useColorModeValue(
-    "0 1px 2px rgba(0, 0, 0, 0.2)",
-    "none"
-  );
+  const chatBg = useColorModeValue('white', 'gray.700');
+  const chatBorderColor = useColorModeValue('gray.200', 'gray.600');
+  const chatShadow = useColorModeValue('0 1px 2px rgba(0, 0, 0, 0.2)', 'none');
 
-  const handleSubmit = (e) => {
+  // Obtener los mensajes al cargar el componente
+  useEffect(() => {
+    getMessages();
+  }, []);
+
+  // Función para obtener los mensajes de la base de datos
+  const getMessages = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/messages');
+      setMessagesList(response.data);
+    } catch (error) {
+      console.error('Error al obtener los mensajes:', error);
+    }
+  };
+
+  // Función para guardar un nuevo mensaje
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Enviando mensaje:", message);
-    setMessagesList([...messagesList, message]);
-    setMessage("");
+    console.log('Enviando mensaje:', message);
+
+    try {
+      // Enviar el mensaje al backend
+      await axios.post('http://localhost:3000/messages', { content: message });
+
+      // Actualizar la lista de mensajes
+      setMessagesList([...messagesList, { content: message }]);
+      setMessage('');
+    } catch (error) {
+      console.error('Error al guardar el mensaje:', error);
+    }
   };
 
   return (
@@ -49,8 +72,8 @@ const ChatBubble = () => {
         alignItems="center"
         boxShadow={chatShadow}
         transition="all 0.2s"
-        _hover={{ bg: "orangeue.600" }}
-        _active={{ bg: "orange.700" }}
+        _hover={{ bg: 'orange.600' }}
+        _active={{ bg: 'orange.700' }}
       >
         <FiMessageSquare size={24} color="white" />
       </Box>
@@ -67,7 +90,7 @@ const ChatBubble = () => {
         borderRadius="lg"
         boxShadow={chatShadow}
         transition="all 0.2s"
-        transform={isOpen ? "translateY(0)" : "translateY(100%)"}
+        transform={isOpen ? 'translateY(0)' : 'translateY(100%)'}
         opacity={isOpen ? 1 : 0}
       >
         <Flex justify="space-between" align="center" p={3}>
@@ -95,7 +118,7 @@ const ChatBubble = () => {
                 mb={2}
               >
                 <Text fontSize="sm" color="gray.500">
-                  {msg}
+                  {msg.content}
                 </Text>
               </Box>
             ))
@@ -132,8 +155,8 @@ const ChatBubble = () => {
                   color="white"
                   px={4}
                   borderTopRadius="0"
-                  _hover={{ bg: "orange.600" }}
-                  _active={{ bg: "orange.700" }}
+                  _hover={{ bg: 'orange.600' }}
+                  _active={{ bg: 'orange.700' }}
                 >
                   Enviar
                 </Button>
@@ -147,4 +170,3 @@ const ChatBubble = () => {
 };
 
 export default ChatBubble;
-
